@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api")
 public class RestApiController {
 
     public static final Logger logger = LoggerFactory.getLogger(RestApiController.class);
@@ -24,14 +23,15 @@ public class RestApiController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "1";
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String test(){
+        return  "1";
     }
 
     //获取所有的用户
     @RequestMapping(value = "/user/", method = RequestMethod.GET)
     public ResponseEntity<List<User>> listAllUsers() {
+
         logger.info("获取用户列表");
         List<User> users = userService.findAllUsers();
 
@@ -44,7 +44,7 @@ public class RestApiController {
     }
 
     //通过id获取用户
-    @RequestMapping(value = "/user/id", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getUser(@PathVariable("id") long id) {
 
         logger.info("Fetching User with id {}", id);
@@ -75,7 +75,7 @@ public class RestApiController {
         userService.saveUser(user);
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setLocation(uriComponentsBuilder.path("/api/user/{id}").buildAndExpand(user.getId()).toUri());
+        httpHeaders.setLocation(uriComponentsBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
 
         return  new ResponseEntity<String>(httpHeaders, HttpStatus.CREATED);
 

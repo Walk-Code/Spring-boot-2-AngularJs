@@ -13,14 +13,14 @@ angular.module('demo').controller('UserController', ['UserService', '$scope',
         self.updateUser = updateUser;
         self.removeUser = removeUser;
         self.editUser = editUser;
-        self.reset = rest;
+        self.reset = reset;
 
         self.successMessage = '';
         self.errorMessage = '';
         self.done = false;
 
         self.onlyIntegers = /^\d+$/;
-        self.onlyNumbers = /^\d([,.]\d+)?$/;
+        self.onlyNumbers = /^-?\d+$/;
         
         function submit() {
             console.log('Submitting');
@@ -42,7 +42,7 @@ angular.module('demo').controller('UserController', ['UserService', '$scope',
                     self.errorMessage = '';
                     self.done = true;
                     self.user = {};
-                    $scope.myForm.$setPristine();
+                   $scope.myForm.$setPristine();
                 },
                 function (errorResponse) {
                     console.error('Error while creating User');

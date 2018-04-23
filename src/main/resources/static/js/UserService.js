@@ -57,7 +57,7 @@ angular.module('demo').factory('UserService', ['$localStorage', '$http', '$q', '
             $http.post(urls.USER_SERVICE_API, user).then(
                 function (response) {
                     loadAllUsers();
-                    response.resolve(response.data);
+                    deferred.resolve(response.data);
                 },
                 function (errorResponse) {
                     console.error('Error while creating User : '+ errorResponse.data.errorMessage);

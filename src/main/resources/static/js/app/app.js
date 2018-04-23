@@ -1,8 +1,8 @@
 var app = angular.module('demo', ['ui.router', 'ngStorage'])
 
 app.constant('urls', {
-    BASE: 'http://localhost:8080/demo',
-    USER_SERVICE_API: 'http://localhost:8080/demo/api/user/'
+    BASE: 'http://localhost:8080',
+    USER_SERVICE_API: 'http://localhost:8080/user/'
 });
 
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
